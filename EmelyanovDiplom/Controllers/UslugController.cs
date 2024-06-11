@@ -28,9 +28,9 @@ namespace EmelyanovDiplom.Controllers
         }
 
         [HttpGet("/GetUslugiById/{providerId}")]
-        public async Task<ActionResult<Uslugi>> GetUslugi(int providerId)
+        public async Task<ActionResult<List<Uslugi>>> GetUslugi(int providerId)
         {
-            var uslugi = await _context.Uslugi.FirstOrDefaultAsync(u => u.Provider == providerId);
+            var uslugi = _context.Uslugi.Where(u => u.Provider == providerId).ToList();
 
             if (uslugi == null)
             {
